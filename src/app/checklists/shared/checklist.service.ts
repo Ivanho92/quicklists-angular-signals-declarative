@@ -1,5 +1,10 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { AddChecklist, Checklist } from './checklist.model';
+import {
+  AddChecklist,
+  Checklist,
+  ChecklistId,
+  EditChecklist,
+} from './checklist.model';
 import { Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -19,6 +24,9 @@ export class ChecklistService {
 
   // Sources
   add$ = new Subject<AddChecklist>();
+  edit$ = new Subject<EditChecklist>();
+  delete$ = new Subject<ChecklistId>();
+  reset$ = new Subject<ChecklistId>();
 
   constructor() {
     // Reducers
@@ -29,6 +37,26 @@ export class ChecklistService {
           ...this.state().checklists,
           this.generateChecklistId(addChecklist),
         ],
+      })),
+    );
+
+    this.edit$.pipe(takeUntilDestroyed()).subscribe((editChecklist) =>
+      this.state.update((state) => ({
+        ...state,
+        checklists: this.state().checklists.map((checklist) =>
+          checklist.id === editChecklist.id
+            ? { ...checklist, ...editChecklist.data }
+            : checklist,
+        ),
+      })),
+    );
+
+    this.delete$.pipe(takeUntilDestroyed()).subscribe((deleteChecklistId) =>
+      this.state.update((state) => ({
+        ...state,
+        checklists: this.state().checklists.filter(
+          (checklist) => checklist.id !== deleteChecklistId,
+        ),
       })),
     );
   }

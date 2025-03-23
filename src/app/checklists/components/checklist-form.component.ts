@@ -7,7 +7,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   imports: [KeyValuePipe, ReactiveFormsModule],
   template: `
     <header>
-      <h2>Dialog title</h2>
+      <h2>{{ title() }}</h2>
     </header>
     <section>
       <form
@@ -43,6 +43,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   `,
 })
 export class ChecklistFormComponent {
+  title = input.required<string>();
   form = input.required<FormGroup>();
 
   onSave = output();

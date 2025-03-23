@@ -82,12 +82,13 @@ export default class ChecklistDetailPageComponent {
       .filter((item) => item.checklistId === +this.params()!.get('id')!),
   );
 
-  hasCompletedItems = computed(() =>
-    !!this.checklistItemService
-      .checklistItems()
-      .find(
-        (item) => item.checklistId === this.checklist()?.id && item.checked,
-      ),
+  hasCompletedItems = computed(
+    () =>
+      !!this.checklistItemService
+        .checklistItems()
+        .find(
+          (item) => item.checklistId === this.checklist()?.id && item.checked,
+        ),
   );
 
   checklistItemForm = this.fb.group({

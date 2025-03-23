@@ -22,9 +22,7 @@ import { RouterLink } from '@angular/router';
       display: block;
     }
   `,
-  imports: [
-    RouterLink
-  ]
+  imports: [RouterLink],
 })
 export class ChecklistListContentComponent {
   checklists = input<Checklist[]>();

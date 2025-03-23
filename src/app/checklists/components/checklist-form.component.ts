@@ -38,7 +38,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
     :host {
       display: block;
       background: #fff;
-      padding: .5em 1em;
+      padding: 0.5em 1em;
     }
   `,
 })

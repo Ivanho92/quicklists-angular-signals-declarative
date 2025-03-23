@@ -1,10 +1,13 @@
 import { Component, input, output } from '@angular/core';
-import { KeyValuePipe } from '@angular/common';
+import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-checklist-form',
-  imports: [KeyValuePipe, ReactiveFormsModule],
+  imports: [KeyValuePipe, ReactiveFormsModule, TitleCasePipe],
+  host: {
+    class: 'flow',
+  },
   template: `
     <header>
       <h2>{{ title() }}</h2>
@@ -16,8 +19,8 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
         (ngSubmit)="onSave.emit(); onClose.emit()"
       >
         @for (control of form().controls | keyvalue; track control.key) {
-          <div>
-            <label [for]="control.key">{{ control.key }}</label>
+          <div class="stack">
+            <label [for]="control.key">{{ control.key | titlecase }}</label>
             <input
               type="text"
               [id]="control.key"
@@ -27,19 +30,12 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
         }
       </form>
     </section>
-    <footer>
-      <button (click)="onClose.emit()">Cancel</button>
+    <footer class="cluster">
+      <button (click)="onClose.emit()" data-severity="secondary">Cancel</button>
       <button type="submit" form="checklist-form" [disabled]="!form().valid">
         Save
       </button>
     </footer>
-  `,
-  styles: `
-    :host {
-      display: block;
-      background: #fff;
-      padding: 0.5em 1em;
-    }
   `,
 })
 export class ChecklistFormComponent {

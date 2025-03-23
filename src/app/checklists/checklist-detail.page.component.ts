@@ -18,6 +18,7 @@ import { ChecklistDetailContentComponent } from './components/checklist-detail-c
     DialogComponent,
   ],
   selector: 'app-checklist-detail-page',
+  host: { class: 'flow' },
   template: `
     @if (checklist(); as checklist) {
       <app-checklist-detail-header

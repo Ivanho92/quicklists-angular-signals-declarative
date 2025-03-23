@@ -1,0 +1,11 @@
+.list-item {
+  padding: 0.5em;
+
+  &:nth-child(odd) {
+    background: hsl(0, 0%, 97%);
+  }
+
+  &:is(:hover, :focus-visible) {
+    background: hsl(0, 0%, 95%);
+  }
+}

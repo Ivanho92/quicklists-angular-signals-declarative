@@ -1,0 +1,35 @@
+button {
+  --color: hsl(0, 0%, 100%);
+  --bg-color: hsl(210, 100%, 40%);
+
+  background: var(--bg-color);
+  color: var(--color);
+  border: none;
+  padding: 0.25em 0.5em;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &[data-outline] {
+    color: var(--bg-color);
+    background: transparent;
+    border: 1px solid var(--bg-color);
+  }
+
+  &[data-severity="secondary"] {
+    --bg-color: hsl(0, 0%, 95%);
+    --color: hsl(0, 0%, 5%);
+  }
+
+  &[data-severity="danger"] {
+    --bg-color: hsl(0, 100%, 45%);
+  }
+
+  &[data-size="small"] {
+    font-size: 0.8em;
+  }
+
+  &:disabled {
+    cursor: initial;
+    opacity: 0.6;
+  }
+}

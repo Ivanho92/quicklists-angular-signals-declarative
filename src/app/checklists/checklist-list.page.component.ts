@@ -16,6 +16,7 @@ import { ChecklistFormComponent } from './components/checklist-form.component';
     ChecklistFormComponent,
   ],
   selector: 'app-checklist-list-page',
+  host: { class: 'flow' },
   template: `
     <app-checklist-list-header
       (onAddChecklist)="checkListBeingEdited.set({})"

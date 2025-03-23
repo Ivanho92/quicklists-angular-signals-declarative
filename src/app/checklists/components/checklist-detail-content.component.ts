@@ -3,29 +3,45 @@ import { ChecklistItem, ChecklistItemId } from '../shared/checklist-item.model';
 
 @Component({
   selector: 'app-checklist-detail-content',
+  host: { class: 'd-block' },
   template: `
-    <section>
-      <ul>
+    <main>
+      <div class="wrapper">
         @for (item of checklistItems(); track item.id) {
-          <li>
-            <div>
+          <div class="[ list-item ] [ cluster space-between ]">
+            <span>
               @if (item.checked) {
                 ✔️
               }
               {{ item.title }}
-              <button (click)="onToggleItem.emit(item.id)">Toggle</button>
-              <button (click)="onEditItem.emit(item)">Edit</button>
-              <button (click)="onDeleteItem.emit(item.id)">Delete</button>
+            </span>
+            <div class="cluster">
+              <button (click)="onToggleItem.emit(item.id)" data-size="small">
+                Toggle
+              </button>
+              <button
+                (click)="onEditItem.emit(item)"
+                data-outline
+                data-size="small"
+              >
+                Edit
+              </button>
+              <button
+                (click)="onDeleteItem.emit(item.id)"
+                data-outline
+                data-severity="danger"
+                data-size="small"
+              >
+                Delete
+              </button>
             </div>
-          </li>
-        } @empty {
-          <div>
-            <h2>Add an item</h2>
-            <p>Click the add button to add your first item to this quicklist</p>
           </div>
+        } @empty {
+          <h2>Add an item</h2>
+          <p>Click on "Add Item" to add a first item to this list.</p>
         }
-      </ul>
-    </section>
+      </div>
+    </main>
   `,
 })
 export class ChecklistDetailContentComponent {

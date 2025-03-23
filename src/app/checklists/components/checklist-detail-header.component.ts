@@ -4,20 +4,28 @@ import { Checklist, ChecklistId } from '../shared/checklist.model';
 
 @Component({
   selector: 'app-checklist-detail-header',
+  host: { class: 'd-block' },
   template: `
-    <header>
-      <a routerLink="/">Back</a>
-      <h1>
-        {{ checklist().title }}
-      </h1>
+    <header class="wrapper">
+      <div class="stack">
+        <a routerLink="/" class="no-underline">&lt; Back</a>
+        <div class="cluster space-between">
+          <h1>
+            {{ checklist().title }}
+          </h1>
 
-      <button
-        [disabled]="!hasCompletedItems()"
-        (click)="onResetChecklist.emit(checklist().id)"
-      >
-        Reset
-      </button>
-      <button (click)="onAddItem.emit()">Add item</button>
+          <div class="cluster">
+            <button
+              [disabled]="!hasCompletedItems()"
+              (click)="onResetChecklist.emit(checklist().id)"
+              data-severity="secondary"
+            >
+              Reset
+            </button>
+            <button (click)="onAddItem.emit()">Add Item</button>
+          </div>
+        </div>
+      </div>
     </header>
   `,
   imports: [RouterLink],

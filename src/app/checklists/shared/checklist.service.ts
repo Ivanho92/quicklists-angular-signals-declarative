@@ -2,8 +2,8 @@ import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { AddChecklist, Checklist, EditChecklist } from './checklist.model';
 import { Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { StorageService } from '../../core/storage.service';
 import { ChecklistItemService } from './checklist-item.service';
+import { ChecklistStorageService } from './checklist-storage.service';
 
 interface ChecklistState {
   checklists: Checklist[];
@@ -13,7 +13,7 @@ interface ChecklistState {
 
 @Injectable({ providedIn: 'root' })
 export class ChecklistService {
-  readonly #storageService = inject(StorageService);
+  readonly #storageService = inject(ChecklistStorageService);
   readonly #checklistItemService = inject(ChecklistItemService);
 
   // State

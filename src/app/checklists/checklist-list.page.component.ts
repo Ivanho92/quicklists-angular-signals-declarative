@@ -2,9 +2,13 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { ChecklistListHeaderComponent } from './components/checklist-list-header.component';
 import { ChecklistListContentComponent } from './components/checklist-list-content.component';
 import { ChecklistService } from './shared/checklist.service';
-import { DialogComponent } from '../core/dialog.component';
+import { DialogComponent } from '../shared/dialog.component';
 import { Checklist } from './shared/checklist.model';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ChecklistFormComponent } from './components/checklist-form.component';
 
 @Component({
@@ -53,11 +57,11 @@ import { ChecklistFormComponent } from './components/checklist-form.component';
 })
 export default class ChecklistListPageComponent {
   protected readonly checklistService = inject(ChecklistService);
-  private readonly fb = inject(FormBuilder);
+  private readonly fb = inject(NonNullableFormBuilder);
 
   checkListBeingEdited = signal<Partial<Checklist> | null>(null);
 
-  checkListForm = this.fb.nonNullable.group({
+  checkListForm = this.fb.group({
     title: ['', Validators.required],
   });
 

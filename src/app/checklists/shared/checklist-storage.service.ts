@@ -1,21 +1,13 @@
-import { inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { Checklist } from '../checklists/shared/checklist.model';
-import { ChecklistItem } from '../checklists/shared/checklist-item.model';
-
-export const LOCAL_STORAGE = new InjectionToken<Storage>(
-  'Window Local Storage Object',
-  {
-    providedIn: 'root',
-    factory: () =>
-      inject(PLATFORM_ID) === 'browser' ? window.localStorage : ({} as Storage),
-  },
-);
+import { Checklist } from './checklist.model';
+import { LOCAL_STORAGE } from '../../core/storage';
+import { ChecklistItem } from './checklist-item.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StorageService {
+export class ChecklistStorageService {
   storage = inject(LOCAL_STORAGE);
 
   readonly #CHECKLISTS_STORAGE_KEY = 'checklists';

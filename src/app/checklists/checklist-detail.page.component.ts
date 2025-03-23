@@ -6,7 +6,7 @@ import { ChecklistHeaderComponent } from './components/checklist-detail-header.c
 import { ChecklistItem } from './shared/checklist-item.model';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ChecklistFormComponent } from './components/checklist-form.component';
-import { DialogComponent } from '../core/dialog.component';
+import { DialogComponent } from '../shared/dialog.component';
 import { ChecklistItemService } from './shared/checklist-item.service';
 import { ChecklistDetailContentComponent } from './components/checklist-detail-content.component';
 
@@ -112,7 +112,7 @@ export default class ChecklistDetailPageComponent {
 
     effect(() => {
       if (!this.checklist()) {
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl('/');
       }
     });
   }

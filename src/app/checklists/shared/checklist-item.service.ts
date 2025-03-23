@@ -8,7 +8,7 @@ import {
   EditChecklistItem,
 } from './checklist-item.model';
 import { ChecklistId } from './checklist.model';
-import { StorageService } from '../../core/storage.service';
+import { ChecklistStorageService } from './checklist-storage.service';
 
 interface ChecklistItemsState {
   checklistItems: ChecklistItem[];
@@ -18,7 +18,7 @@ interface ChecklistItemsState {
 
 @Injectable({ providedIn: 'root' })
 export class ChecklistItemService {
-  readonly #storageService = inject(StorageService);
+  readonly #storageService = inject(ChecklistStorageService);
 
   // State
   readonly #state = signal<ChecklistItemsState>({

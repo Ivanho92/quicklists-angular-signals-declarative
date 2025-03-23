@@ -1,5 +1,5 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ChecklistService } from './shared/checklist.service';
 import { ChecklistHeaderComponent } from './components/checklist-detail-header.component';
@@ -65,6 +65,7 @@ import { ChecklistDetailContentComponent } from './components/checklist-detail-c
 })
 export default class ChecklistDetailPageComponent {
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly checklistService = inject(ChecklistService);
   protected readonly checklistItemService = inject(ChecklistItemService);
   private readonly fb = inject(NonNullableFormBuilder);
@@ -106,6 +107,12 @@ export default class ChecklistDetailPageComponent {
         this.checklistItemForm.patchValue({
           title: this.checklistItemBeingEdited()?.title,
         });
+      }
+    });
+
+    effect(() => {
+      if (!this.checklist()) {
+        this.router.navigateByUrl("/");
       }
     });
   }

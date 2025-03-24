@@ -1,5 +1,4 @@
-import { inject, Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { inject, Injectable, resource } from '@angular/core';
 import { Checklist } from './checklist.model';
 import { LOCAL_STORAGE } from '../../core/storage';
 import { ChecklistItem } from './checklist-item.model';
@@ -14,17 +13,25 @@ export class ChecklistStorageService {
   readonly #CHECKLIST_ITEMS_STORAGE_KEY = 'checklistItems';
 
   loadChecklists() {
-    const checklists = this.storage.getItem(this.#CHECKLISTS_STORAGE_KEY);
-    return of(checklists ? (JSON.parse(checklists) as Checklist[]) : []);
+    return resource({
+      loader: async () => {
+        const checklists = this.storage.getItem(this.#CHECKLISTS_STORAGE_KEY);
+        return checklists ? (JSON.parse(checklists) as Checklist[]) : [];
+      },
+    });
   }
 
   loadChecklistItems() {
-    const checklistsItems = this.storage.getItem(
-      this.#CHECKLIST_ITEMS_STORAGE_KEY,
-    );
-    return of(
-      checklistsItems ? (JSON.parse(checklistsItems) as ChecklistItem[]) : [],
-    );
+    return resource({
+      loader: async () => {
+        const checklistItems = this.storage.getItem(
+          this.#CHECKLIST_ITEMS_STORAGE_KEY,
+        );
+        return checklistItems
+          ? (JSON.parse(checklistItems) as ChecklistItem[])
+          : [];
+      },
+    });
   }
 
   saveChecklists(checklists: Checklist[]) {

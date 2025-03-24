@@ -1,11 +1,16 @@
 .list-item {
+  --clr-light-odd-bg: hsl(0, 0%, 97%);
+  --clr-dark-odd-bg: hsl(0, 0%, 10%);
+  --clr-light-hover: hsl(0, 0%, 95%);
+  --clr-dark-hover: hsl(0, 0%, 5%);
+
   padding: 0.5em;
 
   &:nth-child(odd) {
-    background: hsl(0, 0%, 97%);
+    background: light-dark(var(--clr-light-odd-bg), var(--clr-dark-odd-bg));
   }
 
   &:is(:hover, :focus-visible) {
-    background: hsl(0, 0%, 95%);
+    background: light-dark(var(--clr-light-hover), var(--clr-dark-hover));
   }
 }

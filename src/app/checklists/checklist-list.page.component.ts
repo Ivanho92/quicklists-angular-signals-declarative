@@ -25,6 +25,7 @@ import { ChecklistFormComponent } from './components/checklist-form.component';
     <app-checklist-list-header
       (onAddChecklist)="checkListBeingEdited.set({})"
     />
+
     <app-checklist-list-content
       [checklists]="checklistService.checklists()"
       (onEditChecklist)="checkListBeingEdited.set($event)"
